@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_kakaotalk/components/chat_icon_button.dart';
 import 'package:flutter_kakaotalk/components/my_chat.dart';
 import 'package:flutter_kakaotalk/components/other_chat.dart';
 import 'package:flutter_kakaotalk/components/time_line.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:intl/intl.dart';
 
 class ChatRoomScreen extends StatefulWidget {
   @override
@@ -59,9 +61,51 @@ class _ChatRoomScreenState extends State<ChatRoomScreen> {
                 ),
               ),
             ),
+            Container(
+              height: 60,
+              color: Colors.white,
+              child: Row(
+                children: [
+                  ChatIconButton(icon: Icon(FontAwesomeIcons.plusSquare)),
+                  Expanded(
+                    child: Container(
+                      child: TextField(
+                        controller: _textController,
+                        maxLines: 1,
+                        style: TextStyle(fontSize: 20),
+                        decoration: InputDecoration(
+                          focusedBorder: InputBorder.none,
+                          enabledBorder: InputBorder.none,
+                        ),
+                        onSubmitted: _handleSubmitted,
+                      ),
+                    ),
+                  ),
+                  ChatIconButton(icon: Icon(FontAwesomeIcons.smile)),
+                  ChatIconButton(icon: Icon(FontAwesomeIcons.cog)),
+                ],
+              ),
+            ),
           ],
         ),
       ),
     );
+  }
+
+  void _handleSubmitted(text) {
+    // 내가 입력한 글을 비워줌
+    _textController.clear();
+
+    setState(() {
+      chats.add(
+        MyChat(
+          text: text,
+          time: DateFormat("a K:m")
+              .format(new DateTime.now())
+              .replaceAll("AM", "오전")
+              .replaceAll("PM", "오후"),
+        ),
+      );
+    });
   }
 }

@@ -31,13 +31,12 @@ class _ChatRoomScreenState extends State<ChatRoomScreen> {
           body: Column(
             children: [
               Expanded(
-                  child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    TimeLine(time: "2021년 1월 1일 금요일"),
-                  ],
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [TimeLine(time: "2021년 1월 1일 금요일")],
+                  ),
                 ),
-              ))
+              ),
             ],
           ),
         ),

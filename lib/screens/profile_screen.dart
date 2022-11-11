@@ -8,8 +8,20 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(child: Text("ProfileScreen")),
+    return Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          // 나중에 배경 & 프로필 이미지 수정하기!!!
+          image: NetworkImage(user.backgroundImage),
+          fit: BoxFit.fitHeight,
+        ),
+      ),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        body: Center(
+          child: Text("ProfileScreen"),
+        ),
+      ),
     );
   }
 }
